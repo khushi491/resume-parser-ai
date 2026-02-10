@@ -16,6 +16,12 @@ New York, NY | 123-456-7890 | john.doe@example.com | linkedin.com/in/johndoe | g
 Summary
 A highly motivated software engineer with 5 years of experience.
 
+Skills
+- Python
+- JavaScript
+- Django
+- React
+
 Experience
 Software Engineer, Acme Inc. | New York, NY | Jan 2020 - Present
 - Developed and maintained web applications.
@@ -24,6 +30,13 @@ Education
 Bachelor of Science in Computer Science, University of Example | Sep 2015 - May 2019
 """
         self.parser = ResumeParser(self.resume_text)
+
+    def test_extract_skills(self):
+        skills = self.parser.extract_skills()
+        self.assertIn("Python", skills["technical"])
+        self.assertIn("JavaScript", skills["technical"])
+        self.assertIn("Django", skills["technical"])
+        self.assertIn("React", skills["technical"])
 
     def test_extract_summary(self):
         summary = self.parser.extract_summary()

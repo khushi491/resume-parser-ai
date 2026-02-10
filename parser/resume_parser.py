@@ -1,16 +1,18 @@
 import re
 import json
+from parser.skill_extractor import SkillExtractor
 
 class ResumeParser:
     def __init__(self, resume_text):
         self.resume_text = resume_text
+        self.skill_extractor = SkillExtractor(self.resume_text)
 
     def parse(self):
         personal_info = self.extract_personal_info()
         return {
             "personal_info": personal_info,
             "summary": self.extract_summary(),
-            "skills": self.extract_skills(),
+            "skills": self.skill_extractor.extract_skills(),
             "experience": self.extract_experience(),
             "education": self.extract_education(),
             "projects": self.extract_projects(),
@@ -81,8 +83,7 @@ class ResumeParser:
         return match.group(1).strip() if match else None
 
     def extract_skills(self):
-        # Placeholder
-        return {}
+        return self.skill_extractor.extract_skills()
 
     def extract_experience(self):
         # Placeholder
