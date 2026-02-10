@@ -1,11 +1,10 @@
 import re
 
 class SkillExtractor:
-    def __init__(self, text):
-        self.text = text
+    def __init__(self, skills_section_content):
+        self.skills_section_content = skills_section_content
 
     def extract_skills(self):
-        # This is a very basic skill extractor, it can be improved a lot
         skills = {
             "technical": [],
             "frameworks": [],
@@ -14,11 +13,8 @@ class SkillExtractor:
             "soft": []
         }
         
-        # Simple regex to find skills under a "Skills" section
-        match = re.search(r"Skills\n(.*?)\n\n", self.text, re.DOTALL)
-        if match:
-            skills_text = match.group(1)
+        if self.skills_section_content:
             # This is a placeholder, we need to categorize skills
-            skills["technical"] = [skill.strip() for skill in re.findall(r"- ([\w\s]+)", skills_text)]
+            skills["technical"] = [skill.strip() for skill in re.findall(r"- ([\w\s]+)", self.skills_section_content)]
             
         return skills

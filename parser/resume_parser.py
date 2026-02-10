@@ -1,11 +1,13 @@
 import re
 import json
 from parser.skill_extractor import SkillExtractor
+from parser.utils import split_into_sections
 
 class ResumeParser:
     def __init__(self, resume_text):
         self.resume_text = resume_text
-        self.skill_extractor = SkillExtractor(self.resume_text)
+        self.sections = split_into_sections(resume_text)
+        self.skill_extractor = None
 
     def parse(self):
         personal_info = self.extract_personal_info()
@@ -78,11 +80,20 @@ class ResumeParser:
         return None
 
     def extract_summary(self):
-        # Find the "Summary" section and extract the text until the next section
-        match = re.search(r"Summary\n(.*?)\n\n", self.resume_text, re.DOTALL)
-        return match.group(1).strip() if match else None
+        # Find the "Summary" section in the pre-processed sections
+        for title, content in self.sections.items():
+            if title.lower() == "summary":
+                return content.strip()
+        return None
 
     def extract_skills(self):
+        skills_section_content = ""
+        for title, content in self.sections.items():
+            if title.lower() == "skills":
+                skills_section_content = content
+                break
+        
+        self.skill_extractor = SkillExtractor(skills_section_content)
         return self.skill_extractor.extract_skills()
 
     def extract_experience(self):
