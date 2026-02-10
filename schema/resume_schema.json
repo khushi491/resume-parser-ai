@@ -1,0 +1,68 @@
+{
+  "personal_info": {
+    "full_name": "string",
+    "email": "string",
+    "phone": "string",
+    "location": "string",
+    "linkedin": "string",
+    "github": "string",
+    "portfolio": "string"
+  },
+  "summary": "string",
+  "skills": {
+    "technical": [
+      "string"
+    ],
+    "frameworks": [
+      "string"
+    ],
+    "tools": [
+      "string"
+    ],
+    "languages": [
+      "string"
+    ],
+    "soft": [
+      "string"
+    ]
+  },
+  "experience": [
+    {
+      "company": "string",
+      "role": "string",
+      "location": "string",
+      "start_date": "string",
+      "end_date": "string",
+      "is_current": "boolean",
+      "description": "string",
+      "technologies": [
+        "string"
+      ]
+    }
+  ],
+  "education": [
+    {
+      "institution": "string",
+      "degree": "string",
+      "field": "string",
+      "start_date": "string",
+      "end_date": "string"
+    }
+  ],
+  "projects": [
+    {
+      "name": "string",
+      "description": "string",
+      "technologies": [
+        "string"
+      ],
+      "url": "string"
+    }
+  ],
+  "certifications": [],
+  "total_experience_years": "number",
+  "confidence_score": "number",
+  "missing_fields": [
+    "string"
+  ]
+}
