@@ -25,6 +25,10 @@ Bachelor of Science in Computer Science, University of Example | Sep 2015 - May 
 """
         self.parser = ResumeParser(self.resume_text)
 
+    def test_extract_summary(self):
+        summary = self.parser.extract_summary()
+        self.assertEqual(summary, "A highly motivated software engineer with 5 years of experience.")
+
     def test_extract_personal_info(self):
         personal_info = self.parser.extract_personal_info()
         self.assertEqual(personal_info["full_name"], "John Doe")

@@ -76,8 +76,9 @@ class ResumeParser:
         return None
 
     def extract_summary(self):
-        # Placeholder
-        return None
+        # Find the "Summary" section and extract the text until the next section
+        match = re.search(r"Summary\n(.*?)\n\n", self.resume_text, re.DOTALL)
+        return match.group(1).strip() if match else None
 
     def extract_skills(self):
         # Placeholder
