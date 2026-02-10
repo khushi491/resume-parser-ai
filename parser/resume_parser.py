@@ -1,3 +1,4 @@
+import re
 import json
 
 class ResumeParser:
@@ -5,56 +6,91 @@ class ResumeParser:
         self.resume_text = resume_text
 
     def parse(self):
-        # Placeholder for the actual parsing logic
+        personal_info = self.extract_personal_info()
         return {
-            "personal_info": {
-                "full_name": "John Doe",
-                "email": "john.doe@example.com",
-                "phone": "123-456-7890",
-                "location": "New York, NY",
-                "linkedin": "https://www.linkedin.com/in/johndoe",
-                "github": "https://github.com/johndoe",
-                "portfolio": "https://johndoe.dev"
-            },
-            "summary": "A highly motivated software engineer with 5 years of experience.",
-            "skills": {
-                "technical": ["Python", "JavaScript", "SQL"],
-                "frameworks": ["Django", "React", "Node.js"],
-                "tools": ["Docker", "Git", "JIRA"],
-                "languages": ["English", "Spanish"],
-                "soft": ["Communication", "Teamwork", "Problem-solving"]
-            },
-            "experience": [
-                {
-                    "company": "Acme Inc.",
-                    "role": "Software Engineer",
-                    "location": "New York, NY",
-                    "start_date": "Jan 2020",
-                    "end_date": "Present",
-                    "is_current": True,
-                    "description": "Developed and maintained web applications.",
-                    "technologies": ["Python", "Django", "React"]
-                }
-            ],
-            "education": [
-                {
-                    "institution": "University of Example",
-                    "degree": "Bachelor of Science",
-                    "field": "Computer Science",
-                    "start_date": "Sep 2015",
-                    "end_date": "May 2019"
-                }
-            ],
-            "projects": [
-                {
-                    "name": "Personal Website",
-                    "description": "My personal portfolio website.",
-                    "technologies": ["React", "Gatsby"],
-                    "url": "https://johndoe.dev"
-                }
-            ],
+            "personal_info": personal_info,
+            "summary": self.extract_summary(),
+            "skills": self.extract_skills(),
+            "experience": self.extract_experience(),
+            "education": self.extract_education(),
+            "projects": self.extract_projects(),
             "certifications": [],
-            "total_experience_years": 5,
-            "confidence_score": 0.9,
+            "total_experience_years": 0,
+            "confidence_score": 0,
             "missing_fields": []
         }
+
+    def extract_personal_info(self):
+        name = self.extract_name()
+        email = self.extract_email()
+        phone = self.extract_phone()
+        location = self.extract_location()
+        linkedin = self.extract_linkedin()
+        github = self.extract_github()
+        portfolio = self.extract_portfolio()
+
+        return {
+            "full_name": name,
+            "email": email,
+            "phone": phone,
+            "location": location,
+            "linkedin": linkedin,
+            "github": github,
+            "portfolio": portfolio
+        }
+
+    def extract_name(self):
+        # This is a simple regex, a more robust solution would be to use NLP
+        text = self.resume_text.strip()
+        match = re.search(r"([A-Z][a-z]+(?: [A-Z][a-z]+)+)", text)
+        return match.group(0) if match else None
+
+    def extract_email(self):
+        match = re.search(r"[\w\.-]+@[\w\.-]+", self.resume_text)
+        return match.group(0) if match else None
+
+    def extract_phone(self):
+        match = re.search(r"\(?\d{3}\)?[-.\s]?\d{3}[-.\s]?\d{4}", self.resume_text)
+        return match.group(0) if match else None
+
+    def extract_location(self):
+        # This is a very basic regex and will need to be improved
+        match = re.search(r"((?:[A-Z][a-z]+(?: )?)+, [A-Z]{2})", self.resume_text)
+        return match.group(0) if match else None
+
+    def extract_linkedin(self):
+        match = re.search(r"linkedin\.com/in/[\w-]+", self.resume_text)
+        return match.group(0) if match else None
+
+    def extract_github(self):
+        match = re.search(r"github\.com/[\w-]+", self.resume_text)
+        return match.group(0) if match else None
+
+    def extract_portfolio(self):
+        # Look for a URL that is not linkedin or github
+        match = re.search(r"(https?://[^\s/$.?#].[^\s]*)", self.resume_text)
+        if match:
+            url = match.group(0)
+            if "linkedin.com" not in url and "github.com" not in url:
+                return url
+        return None
+
+    def extract_summary(self):
+        # Placeholder
+        return None
+
+    def extract_skills(self):
+        # Placeholder
+        return {}
+
+    def extract_experience(self):
+        # Placeholder
+        return []
+
+    def extract_education(self):
+        # Placeholder
+        return []
+
+    def extract_projects(self):
+        # Placeholder
+        return []
