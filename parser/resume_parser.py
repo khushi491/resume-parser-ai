@@ -14,7 +14,7 @@ class ResumeParser:
         return {
             "personal_info": personal_info,
             "summary": self.extract_summary(),
-            "skills": self.skill_extractor.extract_skills(), # This line will be changed in the next commit
+            "skills": self.extract_skills(), # This line will be changed in the next commit
             "experience": self.extract_experience(),
             "education": self.extract_education(),
             "projects": self.extract_projects(),
