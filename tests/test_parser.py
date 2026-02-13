@@ -17,10 +17,10 @@ Summary
 A highly motivated software engineer with 5 years of experience.
 
 Skills
-- Python
-- JavaScript
-- Django
-- React
+- Python, Java, C++
+- React, Django, Flask
+- Docker, Git, AWS
+- Communication, Leadership, Problem-Solving
 
 Experience
 Software Engineer, Acme Inc. | New York, NY | Jan 2020 - Present
@@ -37,9 +37,19 @@ Bachelor of Science in Computer Science, University of Example | Sep 2015 - May 
     def test_extract_skills(self):
         skills = self.parser.extract_skills()
         self.assertIn("Python", skills["technical"])
-        self.assertIn("JavaScript", skills["technical"])
-        self.assertIn("Django", skills["technical"])
-        self.assertIn("React", skills["technical"])
+        self.assertIn("Java", skills["technical"])
+        self.assertIn("C++", skills["technical"])
+        self.assertIn("React", skills["frameworks"])
+        self.assertIn("Django", skills["frameworks"])
+        self.assertIn("Flask", skills["frameworks"])
+        self.assertIn("Docker", skills["tools"])
+        self.assertIn("Git", skills["tools"])
+        self.assertIn("AWS", skills["tools"]) # Corrected assertion to expect uppercase
+        self.assertIn("Communication", skills["soft"])
+        self.assertIn("Leadership", skills["soft"])
+        self.assertIn("Problem-Solving", skills["soft"])
+        self.assertNotIn("JavaScript", skills["technical"]) # Ensure old skills are not present if text changed
+        self.assertNotIn("React", skills["technical"]) # Ensure correct categorization
 
     def test_extract_summary(self):
         summary = self.parser.extract_summary()
@@ -55,27 +65,8 @@ Bachelor of Science in Computer Science, University of Example | Sep 2015 - May 
         self.assertEqual(personal_info["github"], "github.com/johndoe")
 
     def test_calculate_total_experience(self):
-        # We need to consider the current date for "Present"
-        # For a stable test, we'll calculate based on fixed dates for the past experience
-        # and then add the duration from Jan 2020 to a fixed "now" date if needed.
-        # However, the ExperienceCalculator already handles datetime.now() for "Present".
-        # Jan 2020 - Present (let's assume current date is Feb 2026, roughly 6 years and 1 month)
-        # Jul 2018 - Dec 2019 (1 year and 6 months = 1.5 years)
-        # Total should be around 7.5 years, but the calculation is more precise.
-        # Using a sample resume for testing total_experience_years for accuracy.
-
-        # For the purpose of this test, let's fix "Present" to a specific date for consistent testing
-        # The ExperienceCalculator uses datetime.now(), so the exact number will vary.
-        # Let's verify it's a reasonable number based on the provided sample.
-        # From Jan 2020 to Feb 2026 is 6 years and 1 month (approx 6.08 years)
-        # From Jul 2018 to Dec 2019 is 1 year and 6 months (1.5 years)
-        # Total should be ~ 7.58 years
-
         parsed_data = self.parser.parse()
         total_experience = parsed_data["total_experience_years"]
-        # Allow for some floating point inaccuracy. Expecting around 7.58 years.
-        # The exact value depends on the execution date due to 'Present'.
-        # Let's assert it's within a reasonable range, e.g., > 6 and < 8
         self.assertGreater(total_experience, 7.5, "Total experience should be greater than 7.5 years")
         self.assertLess(total_experience, 7.65, "Total experience should be less than 7.65 years")
 
