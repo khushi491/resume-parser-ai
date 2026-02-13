@@ -1,0 +1,85 @@
+.App {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  padding: 20px;
+  max-width: 900px;
+  margin: 0 auto;
+  background-color: #f4f4f4;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.App-header {
+  margin-bottom: 30px;
+  color: #333;
+}
+
+.App-header h1 {
+  color: #0056b3;
+}
+
+.input-section textarea {
+  width: 100%;
+  padding: 15px;
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+  min-height: 250px;
+}
+
+.input-section button {
+  background-color: #007bff;
+  color: white;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 18px;
+  transition: background-color 0.3s ease;
+}
+
+.input-section button:hover:not(:disabled) {
+  background-color: #0056b3;
+}
+
+.input-section button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.error-message {
+  color: #dc3545;
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+  border-radius: 5px;
+}
+
+.output-section {
+  margin-top: 40px;
+  text-align: left;
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.output-section h2 {
+  color: #007bff;
+  margin-bottom: 15px;
+}
+
+.output-section pre {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  background-color: #e9ecef;
+  padding: 15px;
+  border-radius: 5px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #333;
+  overflow-x: auto;
+}
