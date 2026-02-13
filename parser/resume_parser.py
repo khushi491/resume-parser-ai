@@ -2,24 +2,29 @@ import re
 import json
 from parser.skill_extractor import SkillExtractor
 from parser.utils import split_into_sections
+from parser.experience_calculator import ExperienceCalculator # Added import
 
 class ResumeParser:
     def __init__(self, resume_text):
         self.resume_text = resume_text
         self.sections = split_into_sections(resume_text)
         self.skill_extractor = None
+        self.experience_calculator = ExperienceCalculator() # Initialize
 
     def parse(self):
         personal_info = self.extract_personal_info()
+        experiences = self.extract_experience() # Extract experiences first
+        total_experience_years = self.experience_calculator.calculate_total_experience(experiences) # Calculate total experience
+
         return {
             "personal_info": personal_info,
             "summary": self.extract_summary(),
             "skills": self.extract_skills(), # This line will be changed in the next commit
-            "experience": self.extract_experience(),
+            "experience": experiences, # Use the extracted experiences
             "education": self.extract_education(),
             "projects": self.extract_projects(),
             "certifications": [],
-            "total_experience_years": 0,
+            "total_experience_years": total_experience_years, # Updated
             "confidence_score": 0,
             "missing_fields": []
         }

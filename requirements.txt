@@ -3,3 +3,4 @@ uvicorn[standard]
 pydantic
 spacy
 python-dotenv
+python-dateutil
